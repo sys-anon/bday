@@ -868,37 +868,75 @@ h3 {
 .cake-scene {
     position: relative;
 
-    width: 320px;
-    height: 240px;
+    width: 390px;
+    height: 310px;
 
     margin:
-        0 auto;
+        5px auto 0;
 
     display: flex;
 
     align-items: flex-end;
+
     justify-content: center;
+
+    filter:
+        drop-shadow(
+            0 40px 40px
+            rgba(0,0,0,.45)
+        );
 }
 
 
 /* =========================================================
-   BLACK CAKE
+   PREMIUM GOLDEN HALO
+========================================================= */
+
+.cake-scene::before {
+    content: "";
+
+    position: absolute;
+
+    width: 310px;
+    height: 180px;
+
+    left: 50%;
+    bottom: 20px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(216,179,106,.17),
+            transparent 70%
+        );
+
+    filter: blur(20px);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CAKE
 ========================================================= */
 
 .cake {
     position: relative;
 
-    width: 220px;
-    height: 170px;
-
-    margin: 0 auto;
+    width: 240px;
+    height: 176px;
 
     transform-origin:
         center bottom;
 
     transition:
-        transform 5s
+        transform 5.2s
         cubic-bezier(.65,0,.35,1);
+
+    z-index: 5;
 }
 
 
@@ -912,28 +950,76 @@ h3 {
     z-index: 1;
 
     bottom: 0;
-    left: 0;
+    left: 50%;
 
-    width: 220px;
-    height: 20px;
+    width: 285px;
+    height: 30px;
+
+    transform:
+        translateX(-50%);
 
     border-radius: 50%;
 
     background:
         linear-gradient(
             180deg,
-            #55505c,
-            #f5f5f6
+            #292929 0%,
+            #141414 35%,
+            #080808 72%,
+            #000000 100%
         );
 
     box-shadow:
-        0 8px 25px
-        rgba(0,0,0,0.5);
+        0 14px 32px
+        rgba(0,0,0,.75),
+
+        0 2px 0
+        rgba(255,255,255,.07),
+
+        0 0 30px
+        rgba(0,0,0,.8);
+}
+
+.plate::before {
+    content: "";
+
+    position: absolute;
+
+    inset:
+        4px 18px 7px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            #202020,
+            #0a0a0a 72%
+        );
+}
+
+.plate::after {
+    content: "";
+
+    position: absolute;
+
+    inset:
+        6px 30px 8px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255,255,255,.11);
+
+    box-shadow:
+        inset 0 1px
+        rgba(255,255,255,.08);
 }
 
 
 /* =========================================================
-   BLACK CAKE BODY
+   PREMIUM CAKE BODY
 ========================================================= */
 
 .cake-body {
@@ -941,40 +1027,113 @@ h3 {
 
     z-index: 2;
 
-    bottom: 20px;
+    bottom: 24px;
     left: 25px;
 
-    width: 170px;
-    height: 100px;
+    width: 190px;
+    height: 98px;
 
+    /*
+     * Rounded premium cake silhouette.
+     */
     border-radius:
-        15px
-        15px
-        25px
-        25px;
+        25px 25px 32px 32px;
 
     background:
         linear-gradient(
             180deg,
-            #33323a,
-            #050505
+            #f1dcae 0%,
+            #d1a264 16%,
+            #9a6638 42%,
+            #654027 70%,
+            #382218 100%
         );
 
     box-shadow:
-        inset 0 -20px
-        rgba(0,0,0,0.6),
+        inset 0 -18px 28px
+        rgba(0,0,0,.35),
 
-        0 12px 35px
-        rgba(0,0,0,0.45);
+        inset 0 3px
+        rgba(255,255,255,.38),
+
+        inset 10px 0 18px
+        rgba(255,245,207,.08),
+
+        0 18px 35px
+        rgba(0,0,0,.52);
+
+    overflow: hidden;
 
     transition:
-        transform 5s
+        transform 5.2s
         cubic-bezier(.65,0,.35,1);
 }
 
 
+/*
+ * Premium glossy highlight.
+ */
+
+.cake-body::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            105deg,
+            transparent 15%,
+            rgba(255,242,198,.15) 40%,
+            rgba(255,255,255,.05) 52%,
+            transparent 75%
+        );
+
+    pointer-events: none;
+}
+
+
+/*
+ * Simulated cut gap.
+ * This appears only after the slice separates.
+ */
+
+.cake-body::before {
+    content: "";
+
+    position: absolute;
+
+    z-index: 10;
+
+    right: -1px;
+    top: 0;
+
+    width: 52px;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(8,7,13,.2) 20%,
+            rgba(8,7,13,.92) 72%,
+            rgba(8,7,13,1) 100%
+        );
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 1.2s ease 4s;
+}
+
+
 /* =========================================================
-   BLACK CAKE TOP
+   CAKE TOP
 ========================================================= */
 
 .cake-top {
@@ -983,30 +1142,72 @@ h3 {
     z-index: 4;
 
     left: 25px;
-    top: 50px;
+    top: 52px;
 
-    width: 170px;
-    height: 45px;
+    width: 190px;
+    height: 54px;
+
+    /*
+     * Large ellipse removes the sharp
+     * upper cake edge.
+     */
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 30%,
+            #fff9e6 0%,
+            #f2dba6 30%,
+            #c29456 58%,
+            #704725 85%,
+            #492d1c 100%
+        );
+
+    box-shadow:
+        inset 0 -12px 14px
+        rgba(54,31,13,.28),
+
+        inset 0 3px
+        rgba(255,255,255,.55),
+
+        0 7px 20px
+        rgba(0,0,0,.42);
+
+    transition:
+        transform 5.2s
+        cubic-bezier(.65,0,.35,1);
+}
+
+
+/*
+ * Extra creamy highlight on top.
+ */
+
+.cream-top {
+    position: absolute;
+
+    left: 8px;
+    right: 8px;
+
+    top: 6px;
+
+    height: 22px;
 
     border-radius: 50%;
 
     background:
-        linear-gradient(
-            180deg,
-            #4a4650,
-            #111116
+        radial-gradient(
+            ellipse at 50% 40%,
+            #ffffff,
+            #fff8e8 48%,
+            #e4d6bb 100%
         );
 
+    opacity: .92;
+
     box-shadow:
-        inset 0 -8px
-        rgba(255,255,255,0.07),
-
-        0 5px 20px
-        rgba(0,0,0,0.35);
-
-    transition:
-        transform 5s
-        cubic-bezier(.65,0,.35,1);
+        0 4px 12px
+        rgba(255,248,220,.2);
 }
 
 
@@ -1017,45 +1218,58 @@ h3 {
 .cream {
     position: absolute;
 
-    top: 5px;
+    z-index: 4;
+
+    top: -1px;
     left: 0;
 
     width: 100%;
     height: 25px;
 
+    border-radius: 50%;
+
     background:
         linear-gradient(
             180deg,
-            #ffffff,
-            #dcdcdc
+            #fffef8 0%,
+            #f4ead7 45%,
+            #d9c8aa 100%
         );
 
-    border-radius: 50%;
+    box-shadow:
+        0 5px 12px
+        rgba(255,247,218,.22);
 }
 
 
 /* =========================================================
-   CAKE DECORATION
+   DECORATIVE DRIPS
 ========================================================= */
 
 .cake-line {
     position: absolute;
 
-    width: 30px;
-    height: 12px;
+    z-index: 5;
+
+    width: 34px;
+    height: 18px;
 
     background:
-        #5d5863;
+        linear-gradient(
+            180deg,
+            #f4dfaa,
+            #b7884a
+        );
 
     border-radius:
         0 0 20px 20px;
 
-    top: 25px;
-    left: 25px;
+    top: 22px;
+    left: 27px;
 }
 
 .cake-line.second {
-    left: 115px;
+    left: 130px;
 }
 
 
@@ -1069,26 +1283,41 @@ h3 {
     z-index: 8;
 
     top: 0;
-    left: 100px;
+    left: 110px;
 
-    width: 20px;
-    height: 55px;
+    width: 21px;
+    height: 57px;
 
+    /*
+     * Solid premium black.
+     * No silver lining.
+     */
     background:
-        repeating-linear-gradient(
-            45deg,
-            #fff,
-            #fff 6px,
-            #ff6b9d 6px,
-            #ff6b9d 12px
+        linear-gradient(
+            90deg,
+            #020202,
+            #111111 50%,
+            #030303
         );
 
-    border-radius: 5px;
+    border-radius: 4px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,0,0,.65),
+
+        inset 1px 0
+        rgba(255,255,255,.08);
 
     transition:
-        opacity 1.5s ease,
-        transform 1.5s ease;
+        opacity 1.3s,
+        transform 1.3s;
 }
+
+
+/*
+ * No candle stripe / silver lining.
+ */
 
 
 /* =========================================================
@@ -1098,16 +1327,18 @@ h3 {
 .flame {
     position: absolute;
 
-    width: 18px;
-    height: 25px;
+    width: 19px;
+    height: 27px;
 
-    top: -25px;
+    top: -27px;
     left: 1px;
 
     background:
-        linear-gradient(
-            #fff4a3,
-            #ffd166
+        radial-gradient(
+            circle at 50% 65%,
+            #fff,
+            #ffe39b 35%,
+            #d99b39 70%
         );
 
     border-radius:
@@ -1117,12 +1348,206 @@ h3 {
         rotate(-45deg);
 
     animation:
-        flame 0.6s
+        royalFlame
+        .65s
         infinite alternate;
 
     box-shadow:
-        0 0 18px
-        rgba(255,209,102,0.8);
+        0 0 12px
+        #ffe6a3,
+
+        0 0 32px
+        rgba(216,165,68,.75);
+}
+
+
+/* =========================================================
+   CAKE SLICE
+========================================================= */
+
+.cake-slice {
+    position: absolute;
+
+    z-index: 7;
+
+    left: 139px;
+    bottom: 24px;
+
+    width: 76px;
+    height: 98px;
+
+    opacity: 0;
+
+    /*
+     * Starts hidden inside the cake.
+     */
+    transform:
+        translateX(0)
+        rotate(0deg);
+
+    transform-origin:
+        left bottom;
+
+    pointer-events: none;
+
+    transition:
+        opacity .8s ease 3.6s,
+        transform 1.6s
+        cubic-bezier(.2,.8,.2,1) 3.8s;
+}
+
+
+/*
+ * Main slice body.
+ */
+
+.slice-body {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 76px;
+    height: 78px;
+
+    border-radius:
+        8px 8px 18px 18px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #e7c995 0%,
+            #b57b43 24%,
+            #74482b 60%,
+            #3a2419 100%
+        );
+
+    box-shadow:
+        inset 0 -14px 20px
+        rgba(0,0,0,.28),
+
+        inset 2px 0
+        rgba(255,255,255,.18),
+
+        0 12px 22px
+        rgba(0,0,0,.55);
+}
+
+
+/*
+ * Cut face of slice.
+ */
+
+.slice-body::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 13px;
+    height: 100%;
+
+    border-radius:
+        8px 0 0 15px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff2cb,
+            #d8b477
+        );
+
+    box-shadow:
+        inset -3px 0
+        rgba(73,43,22,.22);
+}
+
+
+/*
+ * Slice cream.
+ */
+
+.slice-cream-side {
+    position: absolute;
+
+    left: 4px;
+    right: 7px;
+
+    top: 3px;
+
+    height: 24px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffef7,
+            #eadfca
+        );
+
+    box-shadow:
+        0 3px 8px
+        rgba(255,248,220,.2);
+}
+
+
+/*
+ * Slice top.
+ */
+
+.slice-top {
+    position: absolute;
+
+    z-index: 3;
+
+    left: 0;
+    top: -17px;
+
+    width: 76px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 30%,
+            #fff9e7 0%,
+            #e5c88f 38%,
+            #9a6538 72%,
+            #5a351f 100%
+        );
+
+    box-shadow:
+        inset 0 -8px 10px
+        rgba(65,38,18,.25),
+
+        inset 0 2px
+        rgba(255,255,255,.4);
+}
+
+
+/*
+ * Slice becomes visible and separates.
+ */
+
+.cake-cutting .cake-slice {
+    opacity: 1;
+
+    transform:
+        translateX(58px)
+        rotate(4deg);
+}
+
+
+/*
+ * Reveal the cut gap in the main cake.
+ */
+
+.cake-cutting .cake-body::before {
+    opacity: 1;
 }
 
 
@@ -1135,88 +1560,89 @@ h3 {
 
     z-index: 20;
 
-    top: -45px;
-    right: 25px;
+    top: -65px;
+    right: 12px;
 
-    width: 100px;
-    height: 170px;
+    width: 110px;
+    height: 190px;
 
     opacity: 0;
 
     transform:
         rotate(35deg)
-        translateY(-180px);
+        translateY(-200px);
 
     transform-origin:
         bottom center;
 
     transition:
-        transform 5s
+        transform 5.2s
         cubic-bezier(.65,0,.35,1),
-
-        opacity 0.8s ease;
+        opacity .7s;
 }
-
-
-/* =========================================================
-   KNIFE BLADE
-========================================================= */
 
 .knife-blade {
     position: absolute;
 
-    left: 25px;
+    left: 27px;
     top: 0;
 
-    width: 18px;
-    height: 110px;
+    width: 21px;
+    height: 125px;
 
     background:
         linear-gradient(
             90deg,
-            #bdbdbd,
-            #ffffff,
-            #d7d7d7
+            #5e6870,
+            #f8f8f4 45%,
+            #aeb6b8
         );
 
     border-radius:
-        5px
-        5px
-        2px
-        2px;
+        4px 4px 2px 2px;
 
     box-shadow:
-        0 3px 15px
-        rgba(0,0,0,0.4);
+        0 5px 20px
+        rgba(0,0,0,.55);
 }
 
+.knife-blade::after {
+    content: "";
 
-/* =========================================================
-   KNIFE HANDLE
-========================================================= */
+    position: absolute;
+
+    left: 4px;
+    top: 8px;
+
+    width: 2px;
+    height: 105px;
+
+    background:
+        rgba(255,255,255,.8);
+}
 
 .knife-handle {
     position: absolute;
 
     left: 18px;
-    top: 100px;
+    top: 114px;
 
-    width: 32px;
-    height: 65px;
+    width: 40px;
+    height: 72px;
 
-    border-radius: 8px;
+    border-radius: 7px;
 
     background:
         linear-gradient(
             90deg,
-            #151515,
-            #555,
-            #151515
+            #18191b,
+            #4c5051,
+            #111214
         );
 
     box-shadow:
-        0 5px 15px
-        rgba(0,0,0,0.5);
+        0 8px 20px
+        rgba(0,0,0,.6);
 }
 
 
@@ -1234,34 +1660,28 @@ h3 {
 }
 
 
-/* Cake moves */
+/*
+ * IMPORTANT:
+ *
+ * The main cake does NOT move vertically
+ * or away from the plate.
+ */
 
 .cake-cutting .cake {
 
-    transform:
-        translateY(4px);
+    transform: none;
 }
 
 
-/* Cake body moves */
-
-.cake-cutting .cake-body {
-
-    transform:
-        translateX(-22px);
-}
+/*
+ * Main cake stays anchored.
+ * The slice is what moves.
+ */
 
 
-/* Cake top moves */
-
-.cake-cutting .cake-top {
-
-    transform:
-        translateX(-22px);
-}
-
-
-/* Candle goes out */
+/* =========================================================
+   CANDLE GOES OUT
+========================================================= */
 
 .cake-cutting .candle {
 
@@ -1272,7 +1692,9 @@ h3 {
 }
 
 
-/* Flame disappears */
+/* =========================================================
+   FLAME DISAPPEARS
+========================================================= */
 
 .cake-cutting .flame {
 
@@ -1485,6 +1907,33 @@ h3 {
         transform:
             rotate(-45deg)
             scale(1.15);
+
+    }
+
+}
+
+
+/* =========================================================
+   ROYAL FLAME
+========================================================= */
+
+@keyframes royalFlame {
+
+    from {
+
+        transform:
+            rotate(-45deg)
+            scale(1)
+            translateY(0);
+
+    }
+
+    to {
+
+        transform:
+            rotate(-43deg)
+            scale(1.12)
+            translateY(-2px);
 
     }
 
